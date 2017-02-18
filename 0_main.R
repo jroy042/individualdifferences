@@ -1,15 +1,22 @@
 
-setwd("/data/Dropbox/current papers/Active/Cole-Mahrt-Roy/Cole-Mahrt-Roy prosody modeling/R code for LP")
+setwd("/data/Dropbox/current papers/Active/Cole-Mahrt-Roy/LabPhon special issue (ETAP)/github/individualdifferences/")
 
 source("1_readRPT.r")
+source("analysis.R")
+source("supportFuns.R")
+#makeGam()
 
-#Read in the data and required libraries
-totList = readRPT(dirR="/data/Dropbox/current papers/Active/Cole-Mahrt-Roy/Cole-Mahrt-Roy prosody modeling/data")
-#totList = readRPT(dirR="/data/Dropbox/current papers/Active/Lab Phonology/Cole-Mahrt-Roy prosody modeling/data",cutT=FALSE)
+makeETAP()
 
+# #Read in the data and required libraries
+# totList = readRPT(dirR="/data/Dropbox/current papers/Active/Cole-Mahrt-Roy/Cole-Mahrt-Roy prosody modeling/data")
+# #totList = readRPT(dirR="/data/Dropbox/current papers/Active/Lab Phonology/Cole-Mahrt-Roy prosody modeling/data",cutT=FALSE)
+# 
+# 
+# #post the data frames to main environ ment
+# list2env(totList ,.GlobalEnv)
+# 
 
-#post the data frames to main environ ment
-list2env(totList ,.GlobalEnv)
 
 # setwd("/home/joe/Desktop/Prosody Collaboration/")
 # save(boundDat,promDat,file="prosData.RData")

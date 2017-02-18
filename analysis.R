@@ -1,7 +1,7 @@
 # Analysis Script for the 
 # In Progress Cleaning. 
 
-makeGam <- function(labuslong,labuslong2, saveDir = "/data/Big Gamms/"){
+makeGam <- function(){
 #Creates the gam objects and saves everything to a file
 require(mgcv)
 require(visreg)
@@ -43,42 +43,48 @@ promGAM = bam(rating ~ s(word.phonerate) + s(durpostpause)+
                 s(subject, int.sv.norm, bs="fs",m=1), 
               family="binomial", data=labuslong2, cluster=cl)
 
-save(boundGAM,promGAM,labuslong,labuslong2, file="gammsNEW.rda", compress='xz')
+save(boundGAM,promGAM,labuslong,labuslong2, file="/data/ETAP Feb 2017/gammsNEW.rda", compress='xz')
 
 }
 
-plotIndividualDiffs <- function(boundGam,promGam) {
+makeETAP <- function() {
   require(mgcv)
   require(visreg)
   require(ggplot2)
   
+
+  load("/data/ETAP Feb 2017/gammsNEW.rda")
+  
+  boundGAM$data = labuslong
+  promGAM$data=labuslong2
+  
+  setwd("/data/Dropbox/current papers/Active/Cole-Mahrt-Roy/LabPhon special issue (ETAP)/new output/")
+  
+  capture.output(summary(boundGAM),file="boundaryGAM.txt")
+  capture.output(summary(promGAM),file="prominenceGAM.txt")
+  
+  capture.output(concurvity(boundGAM),file="checks.txt", append=TRUE)
+  capture.output(concurvity(promGAM),file="checks.txt", append=TRUE)
+  
+  
   plotGAMSSubject(gam1=boundGAM,type="Boundary")
   plotGAMSSubject(gam1=boundGAM,type="Boundary_all_in_one",ovt=TRUE)
   plotGAMSSubject(gam1=boundGAM,type="Boundary",subj=FALSE)
-  plotGAMSSubject(gam1=boundGAM,type="ToBI_Boundary",subj=FALSE, condL = list(subject="33"))
+  
+  plotGAMSSubject(gam1=promGAM,type="Prominence")
+  plotGAMSSubject(gam1=promGAM,type="Prominence_all_in_one",ovt=TRUE)
+  plotGAMSSubject(gam1=promGAM,type="Prominence",subj=FALSE)
 
-
-  load("gammsNEW.rda")
-
-
- plotGAMSSubject(gam1=boundGAM,type="Boundary")
- plotGAMSSubject(gam1=boundGAM,type="Boundary_all_in_one",ovt=TRUE)
- plotGAMSSubject(gam1=promGAM,type="Prominence")
- plotGAMSSubject(gam1=promGAM,type="Prominence_all_in_one",ovt=TRUE)
- plotGAMSSubject(gam1=boundGAM,type="Boundary",subj=FALSE)
- plotGAMSSubject(gam1=promGAM,type="Prominence",subj=FALSE)
-
+  
   plotGAMSSubject(gam1=boundGAM,type="ToBI_Boundary",subj=FALSE, condL = list(subject="33"))
   plotGAMSSubject(gam1=promGAM,type="ToBI_Prominence",subj=FALSE, condL=list(subject="33"))
+  
 
   plotGAMSSubject(gam1=boundGAM,type="Part_22",subj=FALSE, condL = list(subject="22"))
   plotGAMSSubject(gam1=boundGAM,type="Part_23",subj=FALSE, condL = list(subject="23"))
 
 
-  load("gammsNEW.rda")
 
-  summary(boundGAM)
-  summary(promGAM)
 
   png(file = "frequnecyPlotBound.png", bg = "white",units="in",width = 8, height = 11, res = 72)
   plot = visreg(boundGAM,type="conditional",xvar ="log.wordfreq.switchboard",line=list(col="black"),ps = 12, cex = 1, cex.main = 1, 
