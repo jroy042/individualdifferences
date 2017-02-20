@@ -6,7 +6,8 @@ source("analysis.R")
 source("supportFuns.R")
 #makeGam()
 
-makeETAP()
+
+makeETAPOverall()
 
 # #Read in the data and required libraries
 # totList = readRPT(dirR="/data/Dropbox/current papers/Active/Cole-Mahrt-Roy/Cole-Mahrt-Roy prosody modeling/data")
