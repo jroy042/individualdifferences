@@ -82,12 +82,6 @@ makeETAPIndiv <- function() {
 
   plotGAMSSubject(gam1=boundGAM,type="Part_22",subj=FALSE, condL = list(subject="22"))
   plotGAMSSubject(gam1=boundGAM,type="Part_23",subj=FALSE, condL = list(subject="23"))
-
-
-
-
- 
- 
 }
 
 makeETAPOverall <- function(){
@@ -178,4 +172,19 @@ makeETAPOverall <- function(){
                 main="Prominence",xlab="Part of Speech",ylab="P(Prominence)",rug=FALSE, partial=FALSE,scale="response")
   dev.off()
   
+}
+
+
+
+makeBootKappa <- function (ratings, pType, idir){
+  ksSE = seq(2:31)
+  ksMean = seq(2:31)
+  ksDF = data.frame(ksSE=ksSE,ksMean=ksMean)
+  for (i in 2:31){
+   stepk = bootRating(ratings,numSel = i, numRaters = 32, numSims = 10000, prosodicType=pType, idir=idir)  
+   ksDF[i-1,1] = stepk[[2]] 
+   ksDF[i-1,2] = stepk[[1]] 
+  }
+  setwd(idir)
+  write.csv(ksDF,file="kappaBootStrap.csv")
 }

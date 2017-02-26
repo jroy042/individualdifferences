@@ -1,3 +1,32 @@
+bootRating = function(ratings,numSel=2, numRaters=32,prosodicType,numSims=10000, idir="/data/Dropbox/current papers/Active/Cole-Mahrt-Roy/LabPhon special issue (ETAP)/new output/"){
+  require(irr)
+  require(ggplot2)
+  cols = seq(1:numRaters)
+  kfSamp = seq(1:numSims)
+  for(i in 1:numSims){
+    ids = sample(cols,size=numSel,replace=TRUE)
+    raters = ratings[,ids]
+    kfSamp[i] = kappam.fleiss(raters)$value     
+  }
+  df = data.frame(kappaS = kfSamp)
+  
+  ttl = paste0(prosodicType,"Number of Raters: ", numSel)
+  
+  p = ggplot(df, aes(x=kappaS)) + 
+    geom_histogram(aes(y=..density..),      # Histogram with density instead of count on y-axis
+                   binwidth=.05,
+                   colour="black", fill="white") + ggtitle(ttl)+
+    geom_density(alpha=.2, fill="#FF6666")  # Overlay with transparent density plot
+   
+  setwd(idir)
+  ftitle = paste0(prosodicType,"_",numSel,"_raters.png")
+  png(file = ftitle, bg = "white",units="in",width = 8, height = 11, res = 600)
+  print(p)
+  dev.off()
+  kfMean = mean(kfSamp)
+  kfSE = sd(kfSamp)
+  return(list(kfMean,kfSE))
+}
 
 
 
