@@ -57,7 +57,7 @@ keeps = c("rating","tsl", "subject","norm.wp","pos","int.sv.norm","word.phonerat
 labuslong = labuslong[,keeps,drop=FALSE]
 levels(labuslong$pos) = c("Noun", "Adjective","Adverb","Adverb","Verb","Verb")
 
-  labuslong$pos = relevel(labuslong$pos, ref = "Noun")
+labuslong$pos = relevel(labuslong$pos, ref = "Noun")
 
 ##Prom##
 
@@ -73,14 +73,14 @@ levels(labuslong2$pos) = c("Noun", "Adjective","Adverb","Adverb","Verb","Verb")
 
 #Extract ToBI  
   
-toBIbound = labuslong[labuslong$subject == "LabUS33",]
-toBIProm = labuslong2[labuslong2$subject == "LabUS33",]
-labuslong = labuslong[labuslong$subject != "LabUS33",]
-labuslong2 = labuslong2[labuslong2$subject != "LabUS33",]
-
-toBIbound$group = "toBI"
-toBIProm$group = "toBI"
-toBIProm$boundarym = toBIbound$rating
+# toBIbound = labuslong[labuslong$subject == "LabUS33",]
+# toBIProm = labuslong2[labuslong2$subject == "LabUS33",]
+# labuslong = labuslong[labuslong$subject != "LabUS33",]
+# labuslong2 = labuslong2[labuslong2$subject != "LabUS33",]
+# 
+# toBIbound$group = "toBI"
+# toBIProm$group = "toBI"
+# toBIProm$boundarym = toBIbound$rating
 ###DV all possible regressions#####
 depusba = names(labusn[,1:32])
 depuspa =names(labusn[,33:64])
@@ -219,13 +219,13 @@ if(cutT){
   
   
 }
-boundDat = rbind(mtuslong,mtinlong,labuslong,toBIbound)
-promDat = rbind(mtuslong2,mtinlong2,labuslong2,toBIProm)
+# boundDat = rbind(mtuslong,mtinlong,labuslong,toBIbound)
+# promDat = rbind(mtuslong2,mtinlong2,labuslong2,toBIProm)
 
 
 
 
-retList = list(promDat=promDat,boundDat=boundDat,labusn=labusn,mtusn=mtusn,mtinn=mtinn,labuslong=labuslong,labuslong2=labuslong2,mtuslong=mtuslong,mtuslong2=mtuslong2,mtinlong=mtinlong,mtinlong2=mtinlong2,depusba=depusba,depuspa=depuspa,depmtusba=depmtusba,depmtuspa=depmtuspa,depmtinba=depmtinba,depmtinpa=depmtinpa)
+retList = list(labusn=labusn,labuslong=labuslong,labuslong2=labuslong2)
 return(retList)
 
 

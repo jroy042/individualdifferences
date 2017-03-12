@@ -9,7 +9,7 @@ require(parallel)
 require(irr)
   
 totList = readRPT(dirR="/data/Dropbox/current papers/Active/Cole-Mahrt-Roy/Cole-Mahrt-Roy prosody modeling/data")
-#totList = readRPT(dirR="/data/Dropbox/current papers/Active/Lab Phonology/Cole-Mahrt-Roy prosody modeling/data",cutT=FALSE)
+#totList = readRPT(dirR="C:/Users/Joe/Dropbox/current papers/Active/Cole-Mahrt-Roy/Cole-Mahrt-Roy prosody modeling/data",cutT=FALSE)
   
   
 list2env(totList ,.GlobalEnv)
@@ -60,12 +60,12 @@ makeETAPIndiv <- function() {
   
   setwd("/data/Dropbox/current papers/Active/Cole-Mahrt-Roy/LabPhon special issue (ETAP)/new output/")
 
-  capture.output(summary(boundGAM),file="boundaryGAM.txt")
-  capture.output(summary(promGAM),file="prominenceGAM.txt")
-
-  capture.output(concurvity(boundGAM),file="checks.txt", append=TRUE)
-  capture.output(concurvity(promGAM),file="checks.txt", append=TRUE)
-
+  # capture.output(summary(boundGAM),file="boundaryGAM.txt")
+  # capture.output(summary(promGAM),file="prominenceGAM.txt")
+  # 
+  # capture.output(concurvity(boundGAM),file="checks.txt", append=TRUE)
+  # capture.output(concurvity(promGAM),file="checks.txt", append=TRUE)
+  # 
 
   plotGAMSSubject(gam1=boundGAM,type="Boundary")
   plotGAMSSubject(gam1=boundGAM,type="Boundary_all_in_one",ovt=TRUE)

@@ -1,28 +1,32 @@
 
-setwd("/data/Dropbox/current papers/Active/Cole-Mahrt-Roy/LabPhon special issue (ETAP)/github/individualdifferences/")
+#setwd("/data/Dropbox/current papers/Active/Cole-Mahrt-Roy/LabPhon special issue (ETAP)/github/individualdifferences/")
 #setwd("C:/Users/Joe/Dropbox/current papers/Active/Cole-Mahrt-Roy/LabPhon special issue (ETAP)/github/individualdifferences/")
 
 source("1_readRPT.r")
 source("analysis.R")
 source("supportFuns.R")
-#makeGam()
 
+makeGam()
+# totList = readRPT(dirR="/data/Dropbox/current papers/Active/Cole-Mahrt-Roy/Cole-Mahrt-Roy prosody modeling/data")
+# list2env(totList ,.GlobalEnv)
+# 
+# levels(as.factor(labuslong$subject))
 
 #makeETAPOverall()
-
+makeETAPIndiv()
 # #Read in the data and required libraries
- totList = readRPT(dirR="/data/Dropbox/current papers/Active/Cole-Mahrt-Roy/Cole-Mahrt-Roy prosody modeling/data")
-# #totList = readRPT(dirR="/data/Dropbox/current papers/Active/Lab Phonology/Cole-Mahrt-Roy prosody modeling/data",cutT=FALSE)
-#totList = readRPT(dirR="C:/Users/Joe/Dropbox/current papers/Active/Cole-Mahrt-Roy/Cole-Mahrt-Roy prosody modeling/data")
+# totList = readRPT(dirR="/data/Dropbox/current papers/Active/Cole-Mahrt-Roy/Cole-Mahrt-Roy prosody modeling/data")
+# # #totList = readRPT(dirR="/data/Dropbox/current papers/Active/Lab Phonology/Cole-Mahrt-Roy prosody modeling/data",cutT=FALSE)
+# #totList = readRPT(dirR="C:/Users/Joe/Dropbox/current papers/Active/Cole-Mahrt-Roy/Cole-Mahrt-Roy prosody modeling/data")
+# # 
+# # #post the data frames to main environ ment
+# list2env(totList ,.GlobalEnv)
+
+# ratings = as.matrix(labusn[,1:32])
+# makeBootKappa(ratings, pType="Boundary", idir="/data/kappaThings/")
 # 
-# #post the data frames to main environ ment
-list2env(totList ,.GlobalEnv)
-
-ratings = as.matrix(labusn[,1:32])
-makeBootKappa(ratings, pType="Boundary", idir="/data/kappaThings/")
-
-ratings2=as.matrix(labusn[,34:65])
-makeBootKappa(ratings=ratings2, pType="Prominence", idir="/data/kappaThings/")
+# ratings2=as.matrix(labusn[,34:65])
+# makeBootKappa(ratings=ratings2, pType="Prominence", idir="/data/kappaThings/")
 
 # 
 
