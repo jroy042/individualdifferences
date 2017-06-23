@@ -106,9 +106,9 @@ desDat$pos = factor(desDat$pos)
 
 levels(desDat$pos) = c("Adjective", "Adverb","Adverb","Noun","Verb","Verb")
 
-plot10 = ggplot(desDat, aes(x=factor(pos),y=bscore)) + geom_violin()+ theme_bw() + xlab("")
+plot10 = ggplot(desDat, aes(x=factor(pos),y=bscore)) + geom_violin(scale = "width", bw=.2)+ theme_bw() + xlab("")
 
-plot11 = ggplot(desDat, aes(x=factor(pos),y=pscore)) + geom_violin()+ theme_bw()+ xlab("")
+plot11 = ggplot(desDat, aes(x=factor(pos),y=pscore)) + geom_violin(scale = "width",bw=.2)+ theme_bw()+ xlab("")
 
 png(file="descriptivePOS.png", bg = "transparent",units="in",width = 10, height = 6, res = 72)
 grid.arrange(plot10,plot11, ncol=2, top="Descriptive Distribution of Part of Speech by Prosodic Score")
